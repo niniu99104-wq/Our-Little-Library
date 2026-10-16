@@ -1,0 +1,89 @@
+/* 設計變數：顏色、字體、間距。所有頁面只引用這裡的變數。 */
+
+:root {
+  /* 全站基礎色 */
+  --paper: #FAF7F2;        /* 頁面背景 奶油白 */
+  --card: #FFFDF9;         /* 卡片背景 暖白 */
+  --sand: #EFE6D8;         /* 區塊底色 柔和米色 */
+  --line: #E8E1D7;         /* 分隔線 淡暖灰 */
+  --stone: #CFC6BB;        /* 次要元素 暖灰 */
+  --ink-soft: #8A8178;     /* 次要文字 灰褐（大字或輔助用） */
+  --ink-mute: #746B62;     /* 小字次要文字，確保對比足夠 */
+  --ink: #3A3530;          /* 主要文字 深暖灰 */
+
+  /* 狀態色 */
+  --ok: #6F8E71;
+  --warn: #A9813F;
+  --error: #A9625A;
+
+  /* 書房主題（預設為家庭首頁） */
+  --theme-main: #CFC6BB;
+  --theme-second: #EFE6D8;
+  --theme-bg: #FAF7F2;
+  --theme-deep: #3A3530;
+  --theme-on-main: #3A3530;
+
+  /* 字體 */
+  --font-zh: -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+  --font-serif: "Cormorant Garamond", "Iowan Old Style", "Songti TC", Georgia, serif;
+
+  /* 文字層級 */
+  --fs-display: 2.25rem;  /* 36px 首頁刊頭 */
+  --fs-page: 1.75rem;     /* 28px 頁面大標 */
+  --fs-section: 1.25rem;  /* 20px 區塊標題 */
+  --fs-card: 1.0625rem;   /* 17px 卡片標題 */
+  --fs-body: 0.9375rem;   /* 15px 內文 */
+  --fs-small: 0.8125rem;  /* 13px 輔助文字 */
+
+  /* 間距（8px 為單位） */
+  --s1: 0.5rem;
+  --s2: 1rem;
+  --s3: 1.5rem;
+  --s4: 2rem;
+  --s5: 3rem;
+  --s6: 4rem;
+
+  --radius: 12px;
+  --radius-book: 4px;
+  --tap: 44px;
+  --nav-h: 64px;
+  --content-max: 720px;
+}
+
+[data-theme="liam"] {
+  --theme-main: #8FA6B8;
+  --theme-second: #A7B59E;
+  --theme-bg: #F7F4EC;
+  --theme-deep: #5E7586;
+  --theme-on-main: #22313C;
+}
+
+[data-theme="mom"] {
+  --theme-main: #E8D9C5;
+  --theme-second: #8B6B57;
+  --theme-bg: #FBF8F3;
+  --theme-deep: #6E5444;
+  --theme-on-main: #4A3A30;
+}
+
+[data-theme="dad"] {
+  --theme-main: #5A4636;
+  --theme-second: #DCCFB8;
+  --theme-bg: #F6EEDD;
+  --theme-deep: #5A4636;
+  --theme-on-main: #F6EEDD;
+}
+
+[data-theme="family"] {
+  --theme-main: #DCD3C7;
+  --theme-second: #EFE6D8;
+  --theme-bg: #FAF7F2;
+  --theme-deep: #3A3530;
+  --theme-on-main: #3A3530;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --fs-display: 3rem;
+  }
+}

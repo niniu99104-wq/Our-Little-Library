@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#FAF7F2">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Little Library">
+  <title>Our Little Library</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+</head>
+<body class="is-booting">
+  <div class="shell">
+    <nav class="nav" aria-label="主要導覽">
+      <a class="nav-brand" href="#/home">Our Little Library</a>
+      <a class="nav-item" href="#/home" data-nav="home">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20h-5v-6H9v6H4z"/></svg>
+        <span>首頁</span>
+      </a>
+      <a class="nav-item" href="#/shelves" data-nav="shelves">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h3v16H5zM10 4h3v16h-3zM15.2 4.6l2.9-.8 3.3 15.5-2.9.8z"/></svg>
+        <span>書房</span>
+      </a>
+      <a class="nav-item nav-add" href="#/add" data-nav="add">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        <span>新增</span>
+      </a>
+      <a class="nav-item" href="#/wishlist" data-nav="wishlist">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h10v17l-5-3.6-5 3.6z"/></svg>
+        <span>想買</span>
+      </a>
+      <a class="nav-item" href="#/me" data-nav="me">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c1.2-3.6 4-5.4 7.5-5.4s6.3 1.8 7.5 5.4"/></svg>
+        <span>我的</span>
+      </a>
+    </nav>
+    <main id="view" tabindex="-1"></main>
+  </div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <noscript>這個網站需要開啟 JavaScript 才能使用。</noscript>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
