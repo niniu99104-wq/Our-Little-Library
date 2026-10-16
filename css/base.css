@@ -155,7 +155,8 @@ body.is-auth #view { padding-bottom: var(--s5); }
   .nav-add { order: -1; margin-bottom: var(--s2); background: var(--ink); color: var(--paper); }
   .nav-add span { color: var(--paper); }
   .nav-add svg { width: 22px; height: 22px; padding: 0; background: none; stroke: var(--paper); }
-  .nav-add:hover { background: var(--ink); color: var(--paper); opacity: 0.88; }
+  .nav-add:hover, .nav-add[aria-current="page"] { background: var(--ink); color: var(--paper); }
+  .nav-add:hover { opacity: 0.88; }
 
   #view { width: 100%; padding: var(--s5) var(--s4) var(--s6); }
 }

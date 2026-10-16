@@ -2,7 +2,8 @@
 import { api } from '../api.js';
 import { getSession, clearSession } from '../auth.js';
 import { go } from '../router.js';
-import { forgetAll, recall, remember } from '../store.js';
+import { forgetAll } from '../store.js';
+import { getMembers } from '../data.js';
 import { esc, formatDate } from '../utils/format.js';
 import { formatAge } from '../utils/age.js';
 import { toast, setBusy, confirmDialog, errorView, skeletonLines } from '../ui.js';
@@ -10,13 +11,13 @@ import { toast, setBusy, confirmDialog, errorView, skeletonLines } from '../ui.j
 const ROLE_LABEL = { admin: '管理員', member: '一般成員' };
 const THEMES = new Set(['liam', 'mom', 'dad', 'family']);
 
-function peopleList(members, today) {
+function peopleList(members, today, isAdmin) {
   if (!members.length) return '<div class="empty"><p class="empty-text">還沒有家庭成員資料。</p></div>';
   return `<ul class="people">${members.map((m) => {
     const theme = THEMES.has(m.theme_key) ? m.theme_key : 'family';
     const age = m.birth_date ? formatAge(m.birth_date, today) : '';
     return `
-      <li class="person" data-theme="${theme}">
+      <li class="person" data-theme="${theme}">${isAdmin ? `<a class="person-link" href="#/members/${encodeURIComponent(m.member_id)}/edit" aria-label="編輯 ${esc(m.nickname || m.name_zh)}"></a>` : ''}
         <span class="person-dot" aria-hidden="true"></span>
         <span>
           <span class="person-name">${esc(m.nickname || m.name_zh)}${m.name_en ? ` <span class="hint">${esc(m.name_en)}</span>` : ''}</span>
@@ -27,12 +28,13 @@ function peopleList(members, today) {
         </span>
       </li>`;
   }).join('')}</ul>
-  <p class="hint" style="margin-top:12px">成員資料目前在試算表「Members」分頁修改，網站上的編輯功能會在下一個步驟加入。</p>`;
+  ${isAdmin ? '<div class="actions-row"><a class="btn" href="#/members/new">新增家庭成員</a></div><p class="hint" style="margin-top:8px">點成員即可編輯；新增成員會自動建立他的書房。</p>' : ''}`;
 }
 
 export function mount(view, { isCurrent }) {
   const session = getSession();
   const account = session?.account || {};
+  const isAdmin = account.role === 'admin';
 
   view.innerHTML = `
     <header style="margin-bottom:8px">
@@ -49,6 +51,12 @@ export function mount(view, { isCurrent }) {
     <section class="section" aria-labelledby="people-title">
       <div class="section-head"><h2 class="section-title" id="people-title">家庭成員</h2></div>
       <div id="people">${skeletonLines(3, 40)}</div>
+    </section>
+
+    <section class="section" aria-labelledby="manage-title">
+      <div class="section-head"><h2 class="section-title" id="manage-title">管理</h2></div>
+      <a class="link-row" href="#/settings/taxonomy"><span>分類、標籤與收納位置</span><span aria-hidden="true">›</span></a>
+      ${isAdmin ? '<a class="link-row" href="#/trash"><span>回收桶</span><span aria-hidden="true">›</span></a>' : ''}
     </section>
 
     <section class="section" aria-labelledby="pw-title">
@@ -82,15 +90,12 @@ export function mount(view, { isCurrent }) {
 
   // 家庭成員
   const people = view.querySelector('#people');
-  const drawPeople = (d) => { people.innerHTML = peopleList(d.members, d.today); };
-  const cached = recall('members');
-  if (cached) drawPeople(cached);
-  api('members.list').then((d) => {
+  const drawPeople = (d) => { people.innerHTML = peopleList(d.members, d.today, isAdmin); };
+  getMembers().then((d) => {
     if (!isCurrent()) return;
-    remember('members', d);
     drawPeople(d);
   }).catch((err) => {
-    if (!isCurrent() || err.code === 'AUTH_REQUIRED' || cached) return;
+    if (!isCurrent() || err.code === 'AUTH_REQUIRED') return;
     people.innerHTML = '';
     people.appendChild(errorView(err, () => mount(view, { isCurrent })));
   });

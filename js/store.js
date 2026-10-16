@@ -16,6 +16,10 @@ export function recall(key, maxAgeMs = 5 * 60 * 1000) {
   return hit.value;
 }
 
+export function forget(key) {
+  cache.delete(key);
+}
+
 export function forgetAll() {
   cache.clear();
 }

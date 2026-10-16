@@ -24,7 +24,7 @@ function recentSection(recent) {
       </div>`;
   }
   return `<div class="covers">${recent.map((b) => `
-    <a class="cover-card" href="#/shelves/FAMILY">
+    <a class="cover-card" href="#/book/${encodeURIComponent(b.work_id)}">
       ${b.cover_url
         ? `<img class="cover-img" src="${esc(b.cover_url)}" alt="" loading="lazy" referrerpolicy="no-referrer">`
         : `<div class="cover-fallback" data-theme="family">${esc(b.title)}</div>`}
@@ -39,15 +39,15 @@ function renderBody(el, d) {
     ${shelfStack(shelves, d.shelf_counts, d.today)}
 
     <section class="ledger" aria-label="家庭藏書統計">
-      ${ledgerRow('家庭藏書', d.counts.total, '本', '#/shelves/FAMILY',
+      ${ledgerRow('家庭藏書', d.counts.total, '本', '#/library',
         d.counts.total ? `實體書 ${d.counts.physical} 本，電子書 ${d.counts.ebook} 本，有聲書 ${d.counts.audiobook} 本` : '')}
-      ${ledgerRow('本月新增', d.counts.month_new, '本', '#/shelves/FAMILY')}
+      ${ledgerRow('本月新增', d.counts.month_new, '本', '#/library')}
       ${ledgerRow('想買的書', d.counts.wishlist_open, '本', '#/wishlist')}
       ${ledgerRow('本月閱讀', null, '閱讀紀錄功能開放後顯示', '', '')}
     </section>
 
     <section class="section" aria-labelledby="recent-title">
-      <div class="section-head"><h2 class="section-title" id="recent-title">最近新增</h2></div>
+      <div class="section-head"><h2 class="section-title" id="recent-title">最近新增</h2>${d.recent.length ? '<a class="btn btn-text" href="#/library">全部藏書</a>' : ''}</div>
       ${recentSection(d.recent)}
     </section>`;
 }
