@@ -5,4 +5,4 @@
  * 這個網址本身拿不到任何資料，所有資料都必須登入後才能讀取，所以放在公開的 GitHub 上沒有關係。
  * 這裡不可以放密碼、金鑰或任何私人資料。
  */
-export const API_URL = 'https://script.google.com/macros/s/AKfycbyf2TZHtbrH8fNE0iFgVx2WxjzDNrALCcA-uFbUjJA40MgpxScD8M0bYhzKsagP3hW1oQ/exec';
+export const API_URL = 'https://script.google.com/macros/s/AKfycbxINmgocEeaPuV5Qd1ghkjKf2u3fmYuZ_paLTdxu0Zj4fQVLe4FyWDesnk78zzHxW7cyw/exec';
